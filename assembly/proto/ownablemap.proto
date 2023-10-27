@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package ownablemap;
+
+import "common.proto";
+
+message args {
+   uint32 subcontract_id = 1;
+   oneof kind {
+      common.address address = 2;
+      common.uint64 uint64 = 3;
+   }
+}

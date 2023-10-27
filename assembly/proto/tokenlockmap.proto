@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package tokenlockmap;
+
+import "tokenlock.proto";
+import "common.proto";
+
+import "koinos/options.proto";
+
+message uint64 {
+   uint32 subcontract_id = 1;
+   common.uint64 uint64 = 2;
+}
+
+message address {
+   uint32 subcontract_id = 1;
+   bytes address = 2 [(koinos.btype) = ADDRESS];
+}
+
+message subcontract {
+   uint32 subcontract_id = 1;
+}
+
+enum direction {
+   ascending = 0;
+   descending = 1;
+}
+
+message list_args {
+   uint32 start = 1;
+   int32 limit = 2;
+   direction direction = 3;
+}
+
+message list_address_args {
+   bytes address = 1 [(koinos.btype) = ADDRESS];
+   uint32 start = 2;
+   int32 limit = 3;
+   direction direction = 4;
+}
+
+

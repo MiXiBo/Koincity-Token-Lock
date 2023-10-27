@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package tokenlock;
+
+import "koinos/options.proto";
+
+message str {
+  string value = 1;
+}
+message uint32 {
+  uint32 value = 1;
+}
+message uint64 {
+  uint64 value = 1 [jstype = JS_STRING];
+}
+message address {
+  bytes value = 1 [(koinos.btype) = ADDRESS];
+}
+message boole {
+  bool value = 1;
+}
+
+message empty_object {
+}
+
+message locks_entry{
+  bytes token = 1 [(koinos.btype) = ADDRESS];
+  bytes owner = 2 [(koinos.btype) = ADDRESS];
+  bytes receiver = 3 [(koinos.btype) = ADDRESS];
+  uint64 endDate = 4 [jstype = JS_STRING];
+  uint64 amount = 5 [jstype = JS_STRING];
+  string description = 6;
+}
+
+message locks_item{
+  bytes token = 1 [(koinos.btype) = ADDRESS];
+  bytes owner = 2 [(koinos.btype) = ADDRESS];
+  bytes receiver = 3 [(koinos.btype) = ADDRESS];
+  uint64 startDate = 4 [jstype = JS_STRING];
+  uint64 endDate = 5 [jstype = JS_STRING];
+  uint64 amount = 6 [jstype = JS_STRING];
+  string description = 7;
+  bool claimed = 8;
+}
+
+message tokenlock_init_event{
+  locks_entry locks_entry = 1;
+}
+
+message locks_item_list{
+  repeated tokenlock.locks_item locks_item = 1;
+}
+
+message lock_params{
+  tokenlock.locks_item locks_item = 1;
+  bool locked = 2;
+  uint64 blocktime = 3 [jstype = JS_STRING];
+}
+
+message token_info{
+  string name = 1;
+  string symbol = 2;
+  uint32 decimals = 3;
+}
+
+message lock_params_result{
+  uint32 lock_id = 1;
+  tokenlock.lock_params lock_params = 2;
+  tokenlock.token_info token_info = 3;
+}
+
+message list_locks{
+  repeated tokenlock.lock_params_result value = 1;
+}
+
+message list_myLocks{
+  repeated uint32 items = 1;
+}
