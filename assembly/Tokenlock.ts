@@ -110,7 +110,7 @@ export class Tokenlock extends Ownable {
 
 
   /**
-   * set SToken information
+   * set token information
    * @external
    */
   setToken(): void{
